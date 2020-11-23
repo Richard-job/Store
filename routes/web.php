@@ -20,3 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/profile', 'ProfileController@edit')->name('profile');
+Route::post('/profile/update', 'ProfileController@update')->name('profile.update');
+Route::post('/profile/update/password', 'PasswordController')->name('password.update');
+Route::resource('user', 'UserController');
