@@ -30,7 +30,7 @@
                         <div class="form-group row mb-0 justify-content-md-center">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="text-capitalize btn btn-primary">
-                                    @lang('confirm password') }}
+                                    @lang('confirm password')
                                 </button>
 
                                 @if (Route::has('password.request'))

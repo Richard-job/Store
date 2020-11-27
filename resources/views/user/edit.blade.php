@@ -31,7 +31,7 @@
                                 <label for="last_name" class="col-md-4 col-form-label text-md-right">@lang('Last Name') :</label>
 
                                 <div class="col-md-6">
-                                    <input id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ $user->last_name }}" required autocomplete="last_name" autofocus>
+                                    <input id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ $user->last_name }}" required autocomplete="first_name" autofocus>
 
                                     @error('last_name')
                                         <span class="invalid-feedback" role="alert">
@@ -59,7 +59,7 @@
                                 <label for="phone" class="col-md-4 col-form-label text-md-right">@lang('Phone Number') :</label>
 
                                 <div class="col-md-6">
-                                    <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ $user->phone }}" required autocomplete="phone" autofocus>
+                                    <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ $user->phone }}" required autocomplete="phone" autofocus placeholder="@lang('Format: +000 00000000')">
 
                                     @error('phone')
                                         <span class="invalid-feedback" role="alert">

@@ -29,7 +29,7 @@
                                 <label for="last_name" class="text-capitalize col-md-4 col-form-label text-md-right">@lang('last name') :</label>
 
                                 <div class="col-md-6">
-                                    <input id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ $user->last_name }}" required autocomplete="last_name" autofocus>
+                                    <input id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ $user->last_name }}" required autocomplete="first_name" autofocus>
 
                                     @error('last_name')
                                         <span class="invalid-feedback" role="alert">
@@ -82,7 +82,7 @@
                     <div class="card-header text-center font-weight-bold text-capitalize">@lang('password')</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('password.update') }}">
+                        <form method="POST" id="update.password.form" action="{{ route('password.update') }}">
                             @csrf
 
                             <div class="form-group row">
@@ -100,7 +100,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="password" class="text-capitalize col-md-4 col-form-label text-md-right">@lang('password') :</label>
+                                <label for="password" class="text-capitalize col-md-4 col-form-label text-md-right">@lang('new password') :</label>
 
                                 <div class="col-md-6">
                                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
@@ -150,7 +150,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary text-capitalize" data-dismiss="modal">@lang('no')</button>
-                    <button type="submit" id="update.form" form="update.form" form class="btn btn-danger text-capitalize">@lang('yes')</button>
+                    <button type="submit" id="update.form" form="update.form" class="btn btn-danger text-capitalize">@lang('yes')</button>
                 </div>
             </div>
         </div>
@@ -171,7 +171,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary text-capitalize" data-dismiss="modal">@lang('no')</button>
-                    <button type="submit" id="update.form" form="update.form" form class="btn btn-danger text-capitalize">@lang('yes')</button>
+                    <button type="submit" id="update.password.form" form="update.password.form" class="btn btn-danger text-capitalize">@lang('yes')</button>
                 </div>
             </div>
         </div>

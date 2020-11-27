@@ -17,10 +17,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/profile', 'ProfileController@edit')->name('profile');
-Route::post('/profile/update', 'ProfileController@update')->name('profile.update');
-Route::post('/profile/update/password', 'PasswordController')->name('password.update');
-Route::resource('user', 'UserController');
+
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('/profile', 'ProfileController@edit')->name('profile');
+    Route::post('/profile/update', 'ProfileController@update')->name('profile.update');
+    Route::post('/profile/update/password', 'ProfileController@passwordUpdate')->name('password.update');
+
+    Route::middleware(['admin'])->group(function () {
+        Route::prefix('admin')->group(function () {
+
+            Route::resource('user', 'UserController');
+
+        });
+    });
+});

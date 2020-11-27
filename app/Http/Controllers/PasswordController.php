@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\PasswordRequest as Request;
 use Illuminate\Support\Facades\Hash;
 use App\User;
 
@@ -12,7 +11,7 @@ class PasswordController extends Controller
     /**
      * Handle the incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\PasswordRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function __invoke(Request $request)

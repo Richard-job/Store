@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest as Request;
+use App\Http\Requests\PasswordRequest as PRequest;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -65,11 +67,15 @@ class ProfileController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\UserRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
     {
+        $request->validate([
+            'email' => 'unique:App\User,email,'.Auth::id()
+        ]);
+
         $user = User::find(Auth::id());
 
         $user->first_name = $request->first_name;
@@ -78,6 +84,7 @@ class ProfileController extends Controller
         $user->phone = $request->phone;
         $user->save();
 
+        toast(trans('messages.profile.update'),'success');
         return redirect()->action('ProfileController@edit');
     }
 
@@ -90,5 +97,22 @@ class ProfileController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  App\Http\Requests\PasswordRequest  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function passwordUpdate(PRequest $request)
+    {
+        $user = User::find(Auth::id());
+
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        toast(trans('messages.password.update'),'success');
+        return redirect()->action('ProfileController@edit');
     }
 }

@@ -135,6 +135,9 @@ return [
         ],
     ],
 
+    'old_password' => 'The :attribute isn\'t the current used.',
+    'profile' => 'sksksks',
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Attributes

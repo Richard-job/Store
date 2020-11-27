@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest as Request;
 
 class UserController extends Controller
 {
@@ -32,11 +32,15 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\UserRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'email' => 'unique:App\User'
+        ]);
+
         $user = User::create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
@@ -45,6 +49,7 @@ class UserController extends Controller
             'is_admin' => true
         ]);
 
+        toast(trans('messages.user.admin.create'),'success');
         return redirect()->route('user.show', $user->id);
     }
 
@@ -73,18 +78,23 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\UserRequest  $request
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $user)
     {
+        $request->validate([
+            'email' => 'unique:App\User,email,'.$user->id
+        ]);
+
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
         $user->phone = $request->phone;
         $user->email = $request->email;
         $user->save();
 
+        toast(trans('messages.user.admin.update'),'success');
         return redirect()->route('user.show', $user->id);
     }
 
@@ -98,6 +108,7 @@ class UserController extends Controller
     {
         $user->delete();
 
+        toast(trans('messages.user.admin.destroy'),'success');
         return redirect()->route('user.index');
     }
 }
