@@ -7,6 +7,8 @@ use App\Http\Requests\PasswordRequest as PRequest;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use Illuminate\Support\Facades\Hash;
+use App\Notifications\Profile as DNotification;
+use App\Notifications\Password as PNotification;
 
 class ProfileController extends Controller
 {
@@ -84,6 +86,7 @@ class ProfileController extends Controller
         $user->phone = $request->phone;
         $user->save();
 
+        $user->notify(new DNotification());
         toast(trans('messages.profile.update'),'success');
         return redirect()->action('ProfileController@edit');
     }
@@ -112,6 +115,7 @@ class ProfileController extends Controller
         $user->password = Hash::make($request->password);
         $user->save();
 
+        $user->notify(new PNotification());
         toast(trans('messages.password.update'),'success');
         return redirect()->action('ProfileController@edit');
     }
