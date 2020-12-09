@@ -31,6 +31,8 @@ Route::middleware(['auth'])->group(function () {
         Route::prefix('admin')->group(function () {
 
             Route::resource('user', 'UserController');
+            Route::resource('category', 'CategoryController');
+            Route::resource('category.subcategory', 'CategorySubCategoryController')->shallow();
 
         });
     });
